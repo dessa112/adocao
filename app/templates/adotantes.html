@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adotantes</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <a class="navbar-brand" href="/">Adoção</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/adotados/">Adotados</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/instituicoes/">Instituições</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/processos/">Processos</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/informativos/">Informativos</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/cidades/">Cidades</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/admin/">Administração</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Lista de Adotantes</h2>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Data de Nascimento</th>
+        <th>Cidade</th>
+        <th>Preferência de Idade</th>
+        <th>Aceita Grupo de Irmãos</th>
+        <th>Necessidades Especiais</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for adotante in adotantes %}
+      <tr>
+        <td>{{ adotante.nome }}</td>
+        <td>{{ adotante.cpf }}</td>
+        <td>{{ adotante.email }}</td>
+        <td>{{ adotante.telefone }}</td>
+        <td>{{ adotante.data_nasc }}</td>
+        <td>{{ adotante.cidade }}</td>
+        <td>{{ adotante.preferencia_idade }}</td>
+        <td>{% if adotante.aceita_grupo_irmaos %}Sim{% else %}Não{% endif %}</td>
+        <td>{% if adotante.aceita_necessidades_especiais %}Sim{% else %}Não{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

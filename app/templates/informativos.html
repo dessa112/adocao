@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informativos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <a class="navbar-brand" href="/">Adoção</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/adotantes/">Adotantes</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/adotados/">Adotados</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/instituicoes/">Instituições</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/processos/">Processos</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/cidades/">Cidades</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/admin/">Administração</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Informativos sobre o Processo de Adoção</h2>
+
+  <div class="accordion" id="informativoAccordion">
+    {% for informativo in informativos %}
+    <div class="card">
+      <div class="card-header" id="heading{{ forloop.counter }}">
+        <h2 class="mb-0">
+          <button class="btn btn-link text-left w-100" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
+            aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+            {{ informativo.titulo }} - <small class="text-muted">{{ informativo.categoria }}</small>
+          </button>
+        </h2>
+      </div>
+
+      <div id="collapse{{ forloop.counter }}" class="collapse {% if forloop.first %}show{% endif %}" aria-labelledby="heading{{ forloop.counter }}"
+        data-parent="#informativoAccordion">
+        <div class="card-body">
+          {{ informativo.conteudo }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
