@@ -28,38 +28,71 @@
 </nav>
 
 <div class="container mt-5">
-  <h2 class="mb-4">Lista de Adotantes</h2>
-  <table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>Email</th>
-        <th>Telefone</th>
-        <th>Data de Nascimento</th>
-        <th>Cidade</th>
-        <th>Preferência de Idade</th>
-        <th>Aceita Grupo de Irmãos</th>
-        <th>Necessidades Especiais</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for adotante in adotantes %}
-      <tr>
-        <td>{{ adotante.nome }}</td>
-        <td>{{ adotante.cpf }}</td>
-        <td>{{ adotante.email }}</td>
-        <td>{{ adotante.telefone }}</td>
-        <td>{{ adotante.data_nasc }}</td>
-        <td>{{ adotante.cidade }}</td>
-        <td>{{ adotante.preferencia_idade }}</td>
-        <td>{% if adotante.aceita_grupo_irmaos %}Sim{% else %}Não{% endif %}</td>
-        <td>{% if adotante.aceita_necessidades_especiais %}Sim{% else %}Não{% endif %}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <h2 class="mb-4">Cadastrar Novo Adotante</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Nome</label>
+        <input type="text" name="nome" class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label>CPF</label>
+        <input type="text" name="cpf" class="form-control" maxlength="11" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Telefone</label>
+        <input type="text" name="telefone" class="form-control">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Data de Nascimento</label>
+        <input type="date" name="data_nasc" class="form-control" required>
+      </div>
+      <div class="form-group col-md-8">
+        <label>Endereço</label>
+        <input type="text" name="endereco" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Cidade</label>
+      <select name="cidade" class="form-control">
+        {% for cidade in cidades %}
+        <option value="{{ cidade.id }}">{{ cidade.nome }} - {{ cidade.uf }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Preferência de Idade</label>
+        <input type="text" name="preferencia_idade" class="form-control">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Grupo de Irmãos?</label>
+        <select name="aceita_grupo_irmaos" class="form-control">
+          <option value="true">Sim</option>
+          <option value="false">Não</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Necessidades Especiais?</label>
+        <select name="aceita_necessidades_especiais" class="form-control">
+          <option value="true">Sim</option>
+          <option value="false">Não</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+  </form>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>

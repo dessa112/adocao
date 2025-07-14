@@ -35,6 +35,7 @@ class Adotado(models.Model):
     SEXO_CHOICES = (
         ('M', 'Masculino'),
         ('F', 'Feminino'),
+        ('O', 'Outro'),
     )
 
     nome = models.CharField(max_length=100, verbose_name="Nome do adotado")
@@ -43,6 +44,9 @@ class Adotado(models.Model):
     data_nasc = models.DateField(verbose_name="Data de nascimento")
     situacao = models.CharField(max_length=100, verbose_name="Situação atual")
     necessidades_especiais = models.BooleanField(default=False, verbose_name="Possui necessidades especiais")
+    
+    # NOVO CAMPO
+    foto = models.ImageField(upload_to='fotos_adotados/', null=True, blank=True, verbose_name="Foto")
 
     def __str__(self):
         return self.nome
@@ -145,3 +149,6 @@ class Administrador(models.Model):
     class Meta:
         verbose_name = "Administrador"
         verbose_name_plural = "Administradores"
+
+autorizado = models.BooleanField(default=False, verbose_name="Cadastro autorizado")
+
